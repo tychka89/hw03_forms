@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block content %}
+    <main>
+      <div class="container py-5">        
+        <h1>Все посты пользователя {{ username.get_full_name }} </h1>
+        <h3>Всего постов: {{ number_of_posts }} </h3>   
+          {% for post in page_obj %}
+        <article>  
+          {% include 'includes/post.html' %}
+          <p>{{ post.text }}</p>
+          <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
+        </article>  
+            {% if post.group_id %}
+            <a href="{% url 'posts:group_posts' post.group_id %}">все записи группы</a>
+            {% else %}
+            {% endif %}
+          {% if not forloop.last %}<hr>{% endif %}
+          {% endfor %}      
+        <hr>
+        {% include 'posts/includes/paginator.html' %}  
+      </div>
+    </main>
+{% endblock content %}

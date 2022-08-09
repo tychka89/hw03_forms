@@ -3,22 +3,20 @@
   {{ title }}
 {% endblock %}
 {% block content %}
-<div class="container py-5">
-  <h1>{{ group.title }}</h1>
-  <p>
-    {{ group.description }}
-  </p>
-  {% for post in page_obj %}
-    <article>
-      {% include 'includes/post.html' %}
-    <p>{{ post.text }}</p>    
-    <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
-    </article>
-    {% if post.group %}   
-      <a href="{% url 'posts:group_posts' post.group.slug %}">все записи группы</a>
-    {% endif %} 
-    {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %}
+  <div class="container py-5">
+    <h1>{{ group.title }}</h1>
+    <p>{{ group.description }}</p>
+    {% for post in page_obj %}
+      <article>
+        {% include 'includes/post.html' %}
+        <p>{{ post.text }}</p>    
+        <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
+      </article>
+      {% if post.group %}   
+        <a href="{% url 'posts:group_posts' post.group.slug %}">все записи группы</a>
+      {% endif %} 
+      {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
     {% include 'posts/includes/paginator.html' %}
   </div>  
 {% endblock content %}

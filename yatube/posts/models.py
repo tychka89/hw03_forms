@@ -18,10 +18,14 @@ class Group(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Группа'
+        verbose_name_plural = 'Группы'
+
 
 class Post(models.Model):
     text = models.TextField(
-        verbose_name='Текст',
+        verbose_name='Текст поста',
         help_text='Текст нового поста'
     )
     pub_date = models.DateTimeField(auto_now_add=True)
